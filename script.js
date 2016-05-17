@@ -18,7 +18,8 @@ Artist.prototype.renderCurrentArtist = function () {
   // $('#current-artist-image').append(`<img src=${this.imageUrl}>`);
 };
 
-$('#artist-search-submit').click(function () {
+$('#artist-search-submit').click(function (e) {
+e.preventDefault();
   var artistName = $('#artist-search-input').val();
   searchForArtist(artistName);
 });
