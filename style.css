@@ -9,3 +9,9 @@
 #artist-search-input {
   font-size: 2em;
 }
+
+.artist-results-div {
+  display: none;
+  margin-top: 5%;
+  text-align: center;
+}
