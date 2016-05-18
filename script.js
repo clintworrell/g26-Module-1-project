@@ -31,6 +31,24 @@ Artist.prototype.getRelatedArtists = function () {
   });
 }
 
+Artist.prototype.getArtistTracks = function() {
+  var self = this;
+  var getArtistTracksUrl = `/v1/artists/${this.id}/top-tracks?country=US`;
+  $.ajax({
+    url: `${baseUrl}${getArtistTracksUrl}`,
+    method: "GET",
+    success: function(artistTracks) {
+      self.previewTracksUrls = [];
+      for (var i = 0; i < artistTracks.tracks.length; i++) {
+        self.previewTracksUrls.push(artistTracks.tracks[i].preview_url);
+      }
+      var numTracksToDisplay = 3;
+      self.createPreviewButtons();
+      // for (var )
+    }
+  });
+}
+
 $('#artist-search-submit').click(function (e) {
   e.preventDefault();
   var artistName = $('#artist-search-input').val();
@@ -48,9 +66,39 @@ function searchForArtist(artistName) {
       $('.artist-results-div').toggle();
       artist.renderCurrentArtist();
       artist.getRelatedArtists();
-
+      artist.getArtistTracks();
       // var artistId = results.artists.items[0].id;
       // $('body').append(results.artists.items[0].name)
     }
   });
 }
+
+Artist.prototype.createPreviewButtons = function () {
+  for (var i = 0; i < this.previewTracksUrls.length; i++) {
+    // var playButton = $('<div>').text("play");
+    var playButton = $('<i class="fa fa-play fa-2x" aria-hidden="true"></i>');
+    var audio = new Audio(this.previewTracksUrls[i]);
+    playButton.click(generateCallback(audio));
+    $('#current-artist-tracks').append(playButton);
+  }
+}
+
+function generateCallback(audio) {
+  return function() {
+    audio.play();
+  }
+}
+
+// Tyler's attempt to show me the way to do createPreviewButtons
+// the OOP way.
+// Artist.prototype.createPreviewButtonsOopAttempt = function () {
+//   for (var i = 0; i < this.previewTracksUrls.length; i++) {
+//     var playButton = $('<div>').text("play");
+//     var audio = new Audio(this.previewTracksUrls[i]);
+//     playButton.trackPreviewAudio = audio;
+//     playButton.click(function (e) {
+//       e.currentTarget.trackPreviewAudio.play();
+//     }(audio));
+//     $('#current-artist-tracks').append(playButton);
+//   }
+// }
