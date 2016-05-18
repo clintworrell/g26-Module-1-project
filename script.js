@@ -14,7 +14,7 @@ var Artist = function(spotifyArtistJson) {
 
 Artist.prototype.renderCurrentArtist = function () {
   $('#current-artist-name').empty();
-  $('#current-artist-name').append(`<h2>${this.name}</h2>`);
+  $('#current-artist-name').append(`<h1>${this.name}</h1>`);
   $('#current-artist-image').css('background-image', `url(${this.imageUrl})`);
   // $('#current-artist-image').append(`<img src=${this.imageUrl}>`);
 };
@@ -29,30 +29,23 @@ Artist.prototype.populateRelatedArtists = function () {
       var relatedArtistTwo = $('#related-artist-2');
       var relatedArtistThree = $('#related-artist-3');
 
-      relatedArtistOne.empty();
       relatedArtistOne.text(relatedArtists.artists[0].name);
       relatedArtistOne[0].spotifyArtistId = relatedArtists.artists[0].id;
       relatedArtistOne.click(function () {
         getArtistJSON(relatedArtistOne[0].spotifyArtistId);
       });
 
-      relatedArtistTwo.empty();
       relatedArtistTwo.text(relatedArtists.artists[1].name);
       relatedArtistTwo[0].spotifyArtistId = relatedArtists.artists[1].id;
       relatedArtistTwo.click(function () {
         getArtistJSON(relatedArtistTwo[0].spotifyArtistId);
       });
 
-      relatedArtistThree.empty();
       relatedArtistThree.text(relatedArtists.artists[2].name);
       relatedArtistThree[0].spotifyArtistId = relatedArtists.artists[2].id;
       relatedArtistThree.click(function () {
         getArtistJSON(relatedArtistThree[0].spotifyArtistId);
       });
-
-      // $(relatedArtistTwo).append(relatedArtists.artists[2].name);
-      // $(relatedArtistThree).empty();
-      // $(relatedArtistThree).append(relatedArtists.artists[3].name);
     }
   });
 };
@@ -64,13 +57,12 @@ Artist.prototype.getArtistTracks = function() {
     url: `${baseUrl}${getArtistTracksUrl}`,
     method: "GET",
     success: function(artistTracks) {
-      self.previewTracksUrls = [];
+      self.previewTracks = [];
       for (var i = 0; i < artistTracks.tracks.length; i++) {
-        self.previewTracksUrls.push(artistTracks.tracks[i].preview_url);
+        self.previewTracks.push({trackUrl: artistTracks.tracks[i].preview_url, trackName: artistTracks.tracks[i].name});
       }
       var numTracksToDisplay = 3;
       self.createPreviewButtons();
-      // for (var )
     }
   });
 };
@@ -114,17 +106,19 @@ function getArtistJSON(artistId) {
 
 Artist.prototype.createPreviewButtons = function () {
   $('#current-artist-tracks').empty();
-  for (var i = 0; i < this.previewTracksUrls.length; i++) {
-    var playButton = $('<i class="fa fa-play fa-2x" aria-hidden="true"></i>');
-    var audio = new Audio(this.previewTracksUrls[i]);
-    playButton.click(generateCallback(audio));
+  for (var i = 0; i < this.previewTracks.length; i++) {
+    var playButton = $('<i class="fa fa-play fa-2x play-button" aria-hidden="true"></i>');
+    var audio = new Audio(this.previewTracks[i].trackUrl);
+    playButton[0].trackName = this.previewTracks[i].trackName;
+    playButton.click(generateCallback(audio, playButton[0].trackName));
     $('#current-artist-tracks').append(playButton);
   }
 };
 
-function generateCallback(audio) {
+function generateCallback(audio, trackName) {
   return function() {
     audio.play();
+    $('#current-artist-track-name').html(`Currently playing: <br> ${trackName}`);
   };
 }
 
