@@ -14,7 +14,7 @@ var Artist = function(spotifyArtistJson) {
 
 Artist.prototype.renderCurrentArtist = function () {
   $('#current-artist-name').empty();
-  $('#current-artist-name').append(this.name);
+  $('#current-artist-name').append(`<h2>${this.name}</h2>`);
   $('#current-artist-image').css('background-image', `url(${this.imageUrl})`);
   // $('#current-artist-image').append(`<img src=${this.imageUrl}>`);
 };
@@ -90,6 +90,7 @@ function searchForArtist(artistName) {
       var artist = new Artist(artistJSON);
       $('#artist-search-row').toggle();
       $('.artist-results-div').toggle();
+      $('#header-col-1').toggle();
       artist.renderCurrentArtist();
       artist.populateRelatedArtists();
       artist.getArtistTracks();
