@@ -18,7 +18,7 @@ Artist.prototype.renderCurrentArtist = function () {
   // $('#current-artist-image').append(`<img src=${this.imageUrl}>`);
 };
 
-Artist.prototype.getRelatedArtists = function () {
+Artist.prototype.populateRelatedArtists = function () {
   var getRelatedArtistsUrl = `/v1/artists/${this.id}/related-artists`;
   $.ajax({
     url: `${baseUrl}${getRelatedArtistsUrl}`,
@@ -47,7 +47,7 @@ Artist.prototype.getArtistTracks = function() {
       // for (var )
     }
   });
-}
+};
 
 $('#artist-search-submit').click(function (e) {
   e.preventDefault();
@@ -65,7 +65,7 @@ function searchForArtist(artistName) {
       $('#artist-search-row').toggle();
       $('.artist-results-div').toggle();
       artist.renderCurrentArtist();
-      artist.getRelatedArtists();
+      artist.populateRelatedArtists();
       artist.getArtistTracks();
       // var artistId = results.artists.items[0].id;
       // $('body').append(results.artists.items[0].name)
