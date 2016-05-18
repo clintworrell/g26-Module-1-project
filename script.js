@@ -13,6 +13,7 @@ var Artist = function(spotifyArtistJson) {
 };
 
 Artist.prototype.renderCurrentArtist = function () {
+  $('#current-artist-name').empty();
   $('#current-artist-name').append(this.name);
   $('#current-artist-image').css('background-image', `url(${this.imageUrl})`);
   // $('#current-artist-image').append(`<img src=${this.imageUrl}>`);
@@ -24,12 +25,37 @@ Artist.prototype.populateRelatedArtists = function () {
     url: `${baseUrl}${getRelatedArtistsUrl}`,
     method: "GET",
     success: function(relatedArtists) {
-      $('#related-artist-1').append(relatedArtists.artists[0].name);
-      $('#related-artist-2').append(relatedArtists.artists[1].name);
-      $('#related-artist-3').append(relatedArtists.artists[2].name);
+      var relatedArtistOne = $('#related-artist-1');
+      var relatedArtistTwo = $('#related-artist-2');
+      var relatedArtistThree = $('#related-artist-3');
+
+      relatedArtistOne.empty();
+      relatedArtistOne.text(relatedArtists.artists[0].name);
+      relatedArtistOne[0].spotifyArtistId = relatedArtists.artists[0].id;
+      relatedArtistOne.click(function () {
+        getArtistJSON(relatedArtistOne[0].spotifyArtistId);
+      });
+
+      relatedArtistTwo.empty();
+      relatedArtistTwo.text(relatedArtists.artists[1].name);
+      relatedArtistTwo[0].spotifyArtistId = relatedArtists.artists[1].id;
+      relatedArtistTwo.click(function () {
+        getArtistJSON(relatedArtistTwo[0].spotifyArtistId);
+      });
+
+      relatedArtistThree.empty();
+      relatedArtistThree.text(relatedArtists.artists[2].name);
+      relatedArtistThree[0].spotifyArtistId = relatedArtists.artists[2].id;
+      relatedArtistThree.click(function () {
+        getArtistJSON(relatedArtistThree[0].spotifyArtistId);
+      });
+
+      // $(relatedArtistTwo).append(relatedArtists.artists[2].name);
+      // $(relatedArtistThree).empty();
+      // $(relatedArtistThree).append(relatedArtists.artists[3].name);
     }
   });
-}
+};
 
 Artist.prototype.getArtistTracks = function() {
   var self = this;
@@ -60,33 +86,45 @@ function searchForArtist(artistName) {
     url: `${baseUrl}/v1/search?q=${artistName}&type=artist`,
     method: "GET",
     success: function(results) {
-      var firstReturnedArtist = results.artists.items[0];
-      var artist = new Artist(firstReturnedArtist);
+      var artistJSON = results.artists.items[0];
+      var artist = new Artist(artistJSON);
       $('#artist-search-row').toggle();
       $('.artist-results-div').toggle();
       artist.renderCurrentArtist();
       artist.populateRelatedArtists();
       artist.getArtistTracks();
-      // var artistId = results.artists.items[0].id;
-      // $('body').append(results.artists.items[0].name)
+    }
+  });
+}
+
+function getArtistJSON(artistId) {
+  $.ajax({
+    url: `${baseUrl}/v1/artists/${artistId}`,
+    method: "GET",
+    success: function(results) {
+      var artistJSON = results;
+      var artist = new Artist(artistJSON);
+      artist.renderCurrentArtist();
+      artist.populateRelatedArtists();
+      artist.getArtistTracks();
     }
   });
 }
 
 Artist.prototype.createPreviewButtons = function () {
+  $('#current-artist-tracks').empty();
   for (var i = 0; i < this.previewTracksUrls.length; i++) {
-    // var playButton = $('<div>').text("play");
     var playButton = $('<i class="fa fa-play fa-2x" aria-hidden="true"></i>');
     var audio = new Audio(this.previewTracksUrls[i]);
     playButton.click(generateCallback(audio));
     $('#current-artist-tracks').append(playButton);
   }
-}
+};
 
 function generateCallback(audio) {
   return function() {
     audio.play();
-  }
+  };
 }
 
 // Tyler's attempt to show me the way to do createPreviewButtons
