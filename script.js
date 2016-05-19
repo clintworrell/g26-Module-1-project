@@ -14,7 +14,7 @@ var Artist = function(spotifyArtistJson) {
 
 Artist.prototype.renderCurrentArtist = function () {
   $('#current-artist-name').empty();
-  $('#current-artist-name').append(`<h1>${this.name}</h1>`);
+  $('#current-artist-name').append(`${this.name}`);
   $('#current-artist-image').css('background-image', `url(${this.imageUrl})`);
   // $('#current-artist-image').append(`<img src=${this.imageUrl}>`);
 };
@@ -90,9 +90,10 @@ function searchForArtist(artistName) {
     success: function(results) {
       var artistJSON = results.artists.items[0];
       var artist = new Artist(artistJSON);
-      $('#artist-search-row').toggle();
-      $('.artist-results-div').toggle();
-      $('#header-col-1').toggle();
+      $('.search-box').remove();
+      $('#powered-by').remove();
+      $('#audio-player-container').css("background-color", "#F96767");
+      $('.related-artist-name').css("background-color", "#034D64");
       artist.renderCurrentArtist();
       artist.populateRelatedArtists();
       artist.getArtistTracks();
@@ -127,15 +128,20 @@ Artist.prototype.createPreviewButtons = function () {
 
 function generateCallback(audio, trackName) {
   return function() {
+    var playButton = this;
     if (audio.paused) {
       audio.play();
-      $(this).attr("class", "fa fa-play-circle fa-2x play-button");
+      $(this).attr("class", "fa fa-pause fa-2x play-button");
+      // $(this).attr("class", "fa fa-play-circle fa-2x play-button");
     }
     else {
       audio.pause();
-      $(this).attr("class", "fa fa-pause fa-2x play-button");
+      $(this).attr("class", "fa fa-play-circle fa-2x play-button");
     }
     $('#current-artist-track-name').html(`Currently playing: <br> <b>${trackName}</b>`);
+    audio.addEventListener("ended", function() {
+      $(playButton).attr("class", "fa fa-play fa-2x play-button");
+    })
   };
 }
 
