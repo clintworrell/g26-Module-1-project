@@ -127,8 +127,15 @@ Artist.prototype.createPreviewButtons = function () {
 
 function generateCallback(audio, trackName) {
   return function() {
-    audio.play();
-    $('#current-artist-track-name').html(`Currently playing: <br> ${trackName}`);
+    if (audio.paused) {
+      audio.play();
+      $(this).attr("class", "fa fa-play-circle fa-2x play-button");
+    }
+    else {
+      audio.pause();
+      $(this).attr("class", "fa fa-pause fa-2x play-button");
+    }
+    $('#current-artist-track-name').html(`Currently playing: <br> <b>${trackName}</b>`);
   };
 }
 
