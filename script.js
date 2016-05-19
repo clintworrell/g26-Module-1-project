@@ -67,6 +67,16 @@ Artist.prototype.getArtistTracks = function() {
   });
 };
 
+$('#artist-search-input').focus();
+
+$("#artist-search-input").keypress(function(e) {
+  // e.preventDefault();
+    if(e.which === 13) {
+      var artistName = $('#artist-search-input').val();
+      searchForArtist(artistName);
+    }
+});
+
 $('#artist-search-submit').click(function (e) {
   e.preventDefault();
   var artistName = $('#artist-search-input').val();
