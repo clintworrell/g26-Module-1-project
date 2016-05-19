@@ -9,49 +9,42 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="style.css">
     <title>Spotify Artist Search</title>
   </head>
   <body>
-    <div class="container-fluid" id="header-container">
-      <div class="row" id="header-row">
-        <div class="col-md-12" id="header-col-1">
-        </div>
-      </div>
-    </div>
     <div class="container-fluid" id="main-content">
-      <div class="row" id="artist-search-row">
-        <div class="col-md-offset-4 col-md-4" id="artist-search-col-center">
-          <div class="input-group input-group-lg">
+      <div class="row">
+        <div class="col-md-2" id="body-column-left">
+        </div>
+        <div class="col-md-8" id="body-column-center">
+          <div class="input-group input-group-lg search-box">
             <input type="text" class="form-control" placeholder="Search for an artist..." id="artist-search-input">
             <span class="input-group-btn">
               <button class="btn btn-secondary" type="button" id="artist-search-submit">Search</button>
             </span>
           </div>
-          <div style="text-align: center;"><br>
+          <div id="powered-by"><br>
           Powered by <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-2/32/Spotify-icon.png">
           </div>
-        </div>
-      </div>
-      <div class="row" id="artist-results-row">
-        <div class="col-md-3" id="previous-artist-results-col">
-        </div>
-        <div class="col-md-6" id="current-artist-results-col">
-          <div class="artist-results-div" id="current-artist-name">
-          </div>
-          <div class="artist-results-div" id="current-artist-image">
-          </div>
-          <div class="artist-results-div" id="current-artist-tracks">
-          </div>
-          <div class="artist-results-div" id="current-artist-track-name">
+          <div id="audio-player-container">
+            <div id="current-artist-image">
+            </div>
+            <div id="current-artist-name">
+            </div>
+            <div id="current-artist-tracks">
+            </div>
+            <div id="current-artist-track-name">
+            </div>
           </div>
         </div>
-        <div class="col-md-3" id="related-artists-results-col">
-          <div id="related-artist-1">
+        <div class="col-md-2" id="related-artists-results-col">
+          <div class="related-artist-name" id="related-artist-1">
           </div>
-          <div id="related-artist-2">
+          <div class="related-artist-name" id="related-artist-2">
           </div>
-          <div id="related-artist-3">
+          <div class="related-artist-name" id="related-artist-3">
           </div>
         </div>
       </div>
