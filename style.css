@@ -25,3 +25,15 @@
   margin: 0 auto;
   margin-top: 5%;
 }
+
+#current-artist-track-name {
+  margin-top: 2%;
+}
+
+#current-artist-tracks {
+  margin-top: 2%;
+}
+
+.play-button {
+  margin: 1%;
+}
