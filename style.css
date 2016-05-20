@@ -69,6 +69,7 @@ padding-top: 3%;
 
 #powered-by {
   color: #FFF;
+  font-family: "Open Sans", sans-serif;
 }
 
 #related-artists-results-col {
@@ -112,4 +113,30 @@ padding-top: 3%;
   line-height: 100px;
   text-align: center;
   vertical-align: center;
+}
+
+#search-again {
+  margin: 0 auto;
+  margin-top: 30px;
+  text-align: center;
+  color: #FFF;
+  font-family: "Open Sans", sans-serif;
+}
+
+#search-again a:visited {
+  color: #FFF;
+}
+
+.fa-heart {
+  color: #FFF;
+}
+
+#related-artist-1 {
+  cursor: pointer;
+}
+#related-artist-2 {
+  cursor: pointer;
+}
+#related-artist-3 {
+  cursor: pointer;
 }
