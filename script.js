@@ -94,6 +94,8 @@ function searchForArtist(artistName) {
       $('#powered-by').remove();
       $('#audio-player-container').css("background-color", "#F96767");
       $('.related-artist-name').css("background-color", "#034D64");
+      $('#search-again').html('<i class="fa fa-angle-left" aria-hidden="true"></i><a href="index.html"> Search</a>');
+      // $('#search-again').html('<i class="fa fa-undo" aria-hidden="true"></i><a href="index.html"> Search</a>');
       artist.renderCurrentArtist();
       artist.populateRelatedArtists();
       artist.getArtistTracks();
@@ -141,6 +143,7 @@ function generateCallback(audio, trackName) {
     $('#current-artist-track-name').html(`Currently playing: <br> <b>${trackName}</b>`);
     audio.addEventListener("ended", function() {
       $(playButton).attr("class", "fa fa-play fa-2x play-button");
+      $('#current-artist-track-name').empty();
     })
   };
 }
