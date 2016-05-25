@@ -32,18 +32,36 @@ Artist.prototype.populateRelatedArtists = function () {
       relatedArtistOne.text(relatedArtists.artists[0].name);
       relatedArtistOne[0].spotifyArtistId = relatedArtists.artists[0].id;
       relatedArtistOne.click(function () {
+        $(".fa-stop").each(function () {
+          this.trackPreviewAudio.pause();
+          this.trackPreviewAudio.currentTime = 0;
+          $(this).attr("class", "fa fa-play fa-2x play-button");
+          $('#current-artist-track-name').html("Select a track to play");
+        });
         getArtistJSON(relatedArtistOne[0].spotifyArtistId);
       });
 
       relatedArtistTwo.text(relatedArtists.artists[1].name);
       relatedArtistTwo[0].spotifyArtistId = relatedArtists.artists[1].id;
       relatedArtistTwo.click(function () {
+        $(".fa-stop").each(function () {
+          this.trackPreviewAudio.pause();
+          this.trackPreviewAudio.currentTime = 0;
+          $(this).attr("class", "fa fa-play fa-2x play-button");
+          $('#current-artist-track-name').html("Select a track to play");
+        });
         getArtistJSON(relatedArtistTwo[0].spotifyArtistId);
       });
 
       relatedArtistThree.text(relatedArtists.artists[2].name);
       relatedArtistThree[0].spotifyArtistId = relatedArtists.artists[2].id;
       relatedArtistThree.click(function () {
+        $(".fa-stop").each(function () {
+          this.trackPreviewAudio.pause();
+          this.trackPreviewAudio.currentTime = 0;
+          $(this).attr("class", "fa fa-play fa-2x play-button");
+          $('#current-artist-track-name').html("Select a track to play");
+        });
         getArtistJSON(relatedArtistThree[0].spotifyArtistId);
       });
     }
