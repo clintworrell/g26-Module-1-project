@@ -120,10 +120,11 @@ function getArtistJSON(artistId) {
 Artist.prototype.createPreviewButtons = function () {
   $('#current-artist-tracks').empty();
   for (var i = 0; i < this.previewTracks.length; i++) {
-    var playButton = $('<i class="fa fa-play fa-2x play-button" aria-hidden="true"></i>');
+    var playButton = $(`<i class="fa fa-play fa-2x play-button ${i}" aria-hidden="true"></i>`);
     var audio = new Audio(this.previewTracks[i].trackUrl);
     playButton[0].trackName = this.previewTracks[i].trackName;
-    playButton.click(generateCallback(audio, playButton[0].trackName));
+    playButton[0].trackPreviewAudio = audio;
+    playButton.click(generateCallback(playButton[0].trackPreviewAudio, playButton[0].trackName));
     $('#current-artist-tracks').append(playButton);
   }
 };
@@ -132,18 +133,24 @@ function generateCallback(audio, trackName) {
   return function() {
     var playButton = this;
     if (audio.paused) {
+      $(".fa-stop").each(function () {
+        this.trackPreviewAudio.pause();
+        this.trackPreviewAudio.currentTime = 0;
+        $(this).attr("class", "fa fa-play fa-2x play-button");
+      });
       audio.play();
-      $(this).attr("class", "fa fa-pause fa-2x play-button");
-      // $(this).attr("class", "fa fa-play-circle fa-2x play-button");
+      $(this).attr("class", "fa fa-stop fa-2x play-button");
+      $('#current-artist-track-name').html(`Currently playing: <br> <b>${trackName}</b>`);
     }
     else {
       audio.pause();
-      $(this).attr("class", "fa fa-play-circle fa-2x play-button");
+      audio.currentTime = 0;
+      $(this).attr("class", "fa fa-play fa-2x play-button");
+      $('#current-artist-track-name').html("Select a track to play");
     }
-    $('#current-artist-track-name').html(`Currently playing: <br> <b>${trackName}</b>`);
     audio.addEventListener("ended", function() {
       $(playButton).attr("class", "fa fa-play fa-2x play-button");
-      $('#current-artist-track-name').empty();
+      $('#current-artist-track-name').text("Select a track to play");
     })
   };
 }
