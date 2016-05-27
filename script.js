@@ -29,8 +29,9 @@ Artist.prototype.populateRelatedArtists = function () {
       var relatedArtistTwo = $('#related-artist-2');
       var relatedArtistThree = $('#related-artist-3');
 
-      relatedArtistOne.text(relatedArtists.artists[0].name);
-      relatedArtistOne[0].spotifyArtistId = relatedArtists.artists[0].id;
+      relatedArtistOne.off("click");
+      relatedArtistOne.text(relatedArtists.artists[6].name);
+      relatedArtistOne[0].spotifyArtistId = relatedArtists.artists[6].id;
       relatedArtistOne.click(function () {
         $(".fa-stop").each(function () {
           this.trackPreviewAudio.pause();
@@ -41,8 +42,9 @@ Artist.prototype.populateRelatedArtists = function () {
         getArtistJSON(relatedArtistOne[0].spotifyArtistId);
       });
 
-      relatedArtistTwo.text(relatedArtists.artists[1].name);
-      relatedArtistTwo[0].spotifyArtistId = relatedArtists.artists[1].id;
+      relatedArtistTwo.off("click");
+      relatedArtistTwo.text(relatedArtists.artists[7].name);
+      relatedArtistTwo[0].spotifyArtistId = relatedArtists.artists[7].id;
       relatedArtistTwo.click(function () {
         $(".fa-stop").each(function () {
           this.trackPreviewAudio.pause();
@@ -53,8 +55,9 @@ Artist.prototype.populateRelatedArtists = function () {
         getArtistJSON(relatedArtistTwo[0].spotifyArtistId);
       });
 
-      relatedArtistThree.text(relatedArtists.artists[2].name);
-      relatedArtistThree[0].spotifyArtistId = relatedArtists.artists[2].id;
+      relatedArtistThree.off("click");
+      relatedArtistThree.text(relatedArtists.artists[8].name);
+      relatedArtistThree[0].spotifyArtistId = relatedArtists.artists[8].id;
       relatedArtistThree.click(function () {
         $(".fa-stop").each(function () {
           this.trackPreviewAudio.pause();
