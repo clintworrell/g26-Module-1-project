@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
+    <title>Spotify Artist Search</title>
+  </head>
+  <body>
+    <div class="container-fluid" id="main-content">
+      <div class="row">
+        <div class="col-md-2" id="body-column-left">
+            <div id="search-again">
+            </div>
+        </div>
+        <div class="col-md-8" id="body-column-center">
+          <div class="input-group input-group-lg search-box">
+            <input type="text" class="form-control" placeholder="Search for an artist..." id="artist-search-input">
+            <span class="input-group-btn">
+              <button class="btn btn-secondary" type="button" id="artist-search-submit">Search</button>
+            </span>
+          </div>
+          <div id="powered-by"><br>
+          Powered by <img src="http://icons.iconarchive.com/icons/blackvariant/button-ui-requests-2/32/Spotify-icon.png"> and <i class="fa fa-heart" aria-hidden="true"></i>
+
+          </div>
+          <div id="audio-player-container">
+            <div id="current-artist-image">
+            </div>
+            <div id="current-artist-name">
+            </div>
+            <div id="current-artist-tracks">
+            </div>
+            <div id="current-artist-track-name">
+              Select a track to play
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 related-artists-col" id="related-artists-results-col">
+          <div class="related-artist-name" id="related-artist-1">
+          </div>
+          <div class="related-artist-name" id="related-artist-2">
+          </div>
+          <div class="related-artist-name" id="related-artist-3">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+</html>
