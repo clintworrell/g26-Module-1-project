@@ -1,0 +1,23 @@
+{
+  "name": "g26-module-1-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clintworrell/g26-Module-1-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clintworrell/g26-Module-1-project/issues"
+  },
+  "homepage": "https://github.com/clintworrell/g26-Module-1-project#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}

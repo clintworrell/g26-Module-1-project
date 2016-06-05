@@ -115,7 +115,7 @@ function searchForArtist(artistName) {
       $('#powered-by').remove();
       $('#audio-player-container').css("background-color", "#F96767");
       $('.related-artist-name').css("background-color", "#034D64");
-      $('#search-again').html('<i class="fa fa-angle-left" aria-hidden="true"></i><a href="index.html"> Search</a>');
+      $('#search-again').html('<i class="fa fa-angle-left" aria-hidden="true"></i><a href="/"> Search</a>');
       // $('#search-again').html('<i class="fa fa-undo" aria-hidden="true"></i><a href="index.html"> Search</a>');
       artist.renderCurrentArtist();
       artist.populateRelatedArtists();
