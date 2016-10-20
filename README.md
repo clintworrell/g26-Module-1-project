@@ -8,4 +8,4 @@ Built using:
 * CSS
 * JavaScript
 * jQuery
-* Spotify API.
+* Spotify API
